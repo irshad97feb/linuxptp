@@ -1,0 +1,3 @@
+#!/usr/bin/dh-exec
+configs/default.cfg => /etc/linuxptp/ptp4l.conf
+debian/timemaster.conf /etc/linuxptp/

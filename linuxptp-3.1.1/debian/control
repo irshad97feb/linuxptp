@@ -1,0 +1,32 @@
+Source: linuxptp
+Section: utils
+Priority: optional
+Maintainer: Debian Multimedia Maintainers <debian-multimedia@lists.debian.org>
+Uploaders: Tino Mettler <tino+debian@tikei.de>,
+ IOhannes m zmölnig (Debian/GNU) <umlaeute@debian.org>,
+ Punit Agrawal <punit@debian.org>
+Build-Depends: debhelper-compat (= 13), dh-exec
+Standards-Version: 4.6.0
+Homepage: http://linuxptp.sourceforge.net/
+Vcs-Git: https://salsa.debian.org/multimedia-team/linuxptp.git
+Vcs-Browser: https://salsa.debian.org/multimedia-team/linuxptp
+
+Package: linuxptp
+Architecture: linux-any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Precision Time Protocol (PTP, IEEE1588) implementation for Linux
+ Linuxptp is an implementation of the Precision Time Protocol (PTP)
+ according to IEEE standard 1588 for Linux. Features include:
+  - support for hardware and software time stamping via the Linux
+    SO_TIMESTAMPING socket option.
+  - support for the Linux PTP Hardware Clock (PHC) subsystem by using the
+    clock_gettime family of calls, including the new clock_adjtimex
+    system call
+  - implementation of Boundary Clock (BC) and Ordinary Clock (OC)
+  - transport over UDP/IPv4, UDP/IPv6, and raw Ethernet (Layer 2)
+  - support for IEEE 802.1AS-2011 in the role of end station
+ .
+ PTP provides higher precision and faster synchronization than NTP even
+ without hardware support. With hardware support, sub-microsecond
+ accuracy can be expected. Whereas NTP is intended for WAN use, PTP is
+ designed for LAN environments and makes use of UDP multicast.

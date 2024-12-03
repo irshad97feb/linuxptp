@@ -1,0 +1,30 @@
+1. Default configuration
+
+The default configuration can be found in /etc/linuxptp/ptp4l.conf.
+This is the default.cfg provided by the upstream source.
+
+2. Systemd services
+
+The service ptp4l invokes ptp4l on eth0 by default. To adjust the
+parameters, follow these steps:
+
+1. create a directory /etc/systemd/system/ptp4l.service.d
+
+2. place a file with its name ending in .conf there
+
+3. put these lines into the file, with the parameters adjusted to your needs:
+
+[Service]
+ExecStart=
+ExecStart=/usr/sbin/ptp4l -f /etc/linuxptp/ptp4l.conf -i eth0
+
+The service phc2sys syncs the system clock with the PTP clock. It is not
+enabled and started by default. To activate this service, invoke the
+following commands as root:
+
+$ systemctl enable phc2sys
+$ systemctl start phc2sys
+
+It also uses eth0 as the default and can be customized as described above.
+
+The service timemaster also isn't enabled and started by default
