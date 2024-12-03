@@ -1959,7 +1959,6 @@ static int clock_handle_leap(struct phc2sys_private *priv, struct clock *clock,
 			clock->leap_set = clock_leap;
 		}
 	}
-
 	if (pmc_agent_utc_offset_traceable(node) &&
 	    clock->utc_offset_set != clock->sync_offset) {
 		if (clock->clkid == CLOCK_REALTIME)
@@ -1985,6 +1984,7 @@ static void usage(char *progname)
 		" -d [dev]       master PPS device\n"
 		" -s [dev|name]  master clock\n"
 		" -O [offset]    slave-master time offset (0)\n"
+		" -k             keep time sync with offset\n"
 		" -w             wait for ptp4l\n"
 		" common options:\n"
 		" -f [file]      configuration file\n"
@@ -2058,7 +2058,7 @@ int main(int argc, char *argv[])
 	progname = strrchr(argv[0], '/');
 	progname = progname ? 1+progname : argv[0];
 	while (EOF != (c = getopt_long(argc, argv,
-				"arc:d:f:s:E:P:I:S:F:R:N:O:L:M:D:i:u:wn:xz:l:t:mqvh",
+				"arc:d:f:s:E:P:I:S:F:R:N:O:k:L:M:D:i:u:wn:xz:l:t:mqvh",
 				opts, &index))) {
 		switch (c) {
 		case 0:
@@ -2148,6 +2148,9 @@ int main(int argc, char *argv[])
 			}
 			pmc_agent_set_sync_offset(node, offset);
 			priv.forced_sync_offset = -1;
+			break;
+		case 'k':
+		    pmc_agent_set_sync_offset_enable_flag(node);
 			break;
 		case 'L':
 			if (get_arg_val_i(c, optarg, &priv.sanity_freq_limit, 0, INT_MAX) ||

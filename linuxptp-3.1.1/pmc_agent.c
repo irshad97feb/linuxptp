@@ -266,6 +266,10 @@ int pmc_agent_get_sync_offset(struct pmc_agent *agent)
 {
 	return agent->sync_offset;
 }
+int pmc_agent_get_sync_offset_enable_flag(struct pmc_agent *agent)
+{
+	return agent->offset_flag;
+}
 
 int pmc_agent_get_number_ports(struct pmc_agent *node)
 {
@@ -420,6 +424,10 @@ void pmc_agent_set_sync_offset(struct pmc_agent *agent, int offset)
 {
 	agent->sync_offset = offset;
 }
+void pmc_agent_set_sync_offset_enable_flag(struct pmc_agent *agent)
+{
+	agent->offset_flag = 1;
+}
 
 int pmc_agent_subscribe(struct pmc_agent *node, int timeout)
 {
@@ -462,5 +470,9 @@ int pmc_agent_update(struct pmc_agent *node)
 
 bool pmc_agent_utc_offset_traceable(struct pmc_agent *agent)
 {
+	if (pmc_agent_get_sync_offset_enable_flag(agent))
+	{
+		return 1;
+	}
 	return agent->utc_offset_traceable;
 }

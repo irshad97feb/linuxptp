@@ -42,6 +42,7 @@ struct pmc_agent {
 	int pmc_ds_requested;
 	bool stay_subscribed;
 	int sync_offset;
+	int offset_flag;
 	int utc_offset_traceable;
 	int time_traceable;
 	int freq_traceable;
@@ -116,6 +117,7 @@ int pmc_agent_get_sync_offset(struct pmc_agent *agent);
  * @param timeout  Transmit and receive timeout in milliseconds.
  * @return         Zero on success, negative error code otherwise.
  */
+int pmc_agent_get_sync_offset_enable_flag(struct pmc_agent *agent);
 int pmc_agent_query_dds(struct pmc_agent *agent, int timeout);
 
 /**
@@ -174,6 +176,7 @@ void pmc_agent_set_sync_offset(struct pmc_agent *agent, int offset);
  * @param timeout  Transmit and receive timeout in milliseconds.
  * @return         Zero on success, negative error code otherwise.
  */
+void pmc_agent_set_sync_offset_enable_flag(struct pmc_agent *agent);
 int pmc_agent_subscribe(struct pmc_agent *agent, int timeout);
 
 /**
